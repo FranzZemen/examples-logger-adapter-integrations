@@ -1,1 +1,3 @@
-import './bunyan-logger-tightly-coupled-version.js'; // This will execute the code.
+// These imports will execute project code
+import './bunyan-logger-tightly-coupled-version.js';
+import './bunyan-logger-injected-version.js'

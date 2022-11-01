@@ -3,16 +3,13 @@ Created by Franz Zemen 10/31/2022
 License Type: MIT
 
 This is an exampple/good implementation of integrating @franzzemen/bunyan-logger-adapter with bunyan and the
-@franzzemen/logger-adapter in a tightly coupled way.  Y\
+@franzzemen/logger-adapter in a tightly coupled way.
 */
 
 import {bunyanBaseExecutionContext, BunyanLoggerAdapter} from '@franzzemen/bunyan-logger-adapter';
 import {LogExecutionContext, LoggerAdapter} from '@franzzemen/logger-adapter';
 import {LoggerOptions} from 'bunyan';
-// Import basic needs
 import _ from 'lodash';
-// import deepmerge from 'deepmerge';
-import {inspect} from 'util';
 
 
 // Construct a bunyan logger options as usual, with any bunyan options you want.
@@ -27,7 +24,7 @@ const logger = new BunyanLoggerAdapter(bunyanOptions);
 // tested other open source merge function, but there are always issues with some cases like cyclical objects, so we
 // lean on lodash merge, which handles cyclical objects reference copy.  (For clarity, there are no cyclical objects in
 // bunyanBaseExecutionContext, not at least,  until we add the bunyan object as bunyan is cyclical.
-const options: LogExecutionContext = _.merge({}, bunyanBaseExecutionContext);
+const options: LogExecutionContext = _.merge<LogExecutionContext, LogExecutionContext>({}, bunyanBaseExecutionContext);
 
 // We can set additional logging or non-logging execution context options.  Now because the LoggerAdapter, where it's
 // used in @franzzemen code is instantiated all over the place, we'll just be passing the LogExecutionContext.  We can
